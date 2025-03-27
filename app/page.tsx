@@ -7,11 +7,18 @@ import { ToastContainer, toast, Bounce } from 'react-toastify';
 type Stage = "NameAdd" | "SelectCaptain" | "SelectTeam";
 
 export default function Home() {
-
+  // To know the current stage of program to generate the UI accordingly
   const [Stage, setStage] = useState<Stage>("NameAdd")
+  // Players array to store the names of players
   const [Players, setPlayers] = useState<string[]>([])
+  // Current is the name of the player that is being added
   const [Current, setCurrent] = useState("")
-  const handelStage = () => {
+  // Captains is the array of 2 captains the setCaptains is shared to SelectCaptain component and then RotatingText component where the captains are selected 
+  const [captains, setCaptains] = useState(["", ""])
+  // disabled is used to disable the next button for 5 seconds after it is clicked to avoid spamming
+  const [disabled, setDisabled] = useState(false)
+  // handelNext is used to change the stage to the next stage
+  const handelNext = () => {
     if (Players.length < 2) {
       toast.error('Must have at least 2 players', {
         position: "top-right",
@@ -23,31 +30,47 @@ export default function Home() {
         progress: undefined,
         theme: "dark",
         transition: Bounce,
-        });
+      });
       return
     }
     else {
+      setDisabled(true)
       setStage("SelectCaptain")
+      setTimeout(() => {
+        setDisabled(false)
+      }, 5000);
     }
   }
+  // handelBack is used to change the stage to the previous stage
+  const handelBack = () => {
+    if (Stage == "SelectCaptain") {
+      setStage("NameAdd")
+    }
+  }
+  // handelDelete is used to delete a player from the Players array
   const handelDelete = (index: number) => {
     const newPlayers = Players.filter((player, i) => {
       return i !== index
     })
     setPlayers(newPlayers)
   }
+  // handelEdit is used to edit a player from the Players array
   const handelEdit = (index: number) => {
     setCurrent(Players[index])
     handelDelete(index)
   }
+  // addPlayers is used to add the players to the Players array
   const addPlayers = () => {
+    // If the current input is empty then return
     if (Current.trim() === "") {
       return
     }
+    // Split the input by commas and remove the extra spaces
     const CurrentArray = Current.split(",")
     CurrentArray.forEach((element, index) => {
       CurrentArray[index] = element.trim()
     });
+    // Remove the empty strings from the array (if any)
     CurrentArray.forEach((element, index) => {
       if (element === "") {
         CurrentArray.splice(index, 1)
@@ -56,19 +79,22 @@ export default function Home() {
     setPlayers([...Players, ...CurrentArray])
     setCurrent("")
   }
+  // Checks if there is Players array in the local storage and sets it to the Players array
   useEffect(() => {
     const data = localStorage.getItem("Players")
     if (data) {
       setPlayers(JSON.parse(data))
     }
   }, [])
+  // Saves the Players array to the local storage
   useEffect(() => {
-    localStorage.setItem("Players", JSON.stringify(Players))
+    if (Players.length > 0) {
+      localStorage.setItem("Players", JSON.stringify(Players));
+    }
   }, [Players])
 
+  // The First stage is to add the names of the players
   if (Stage == "NameAdd") {
-
-
     return (
       <>
         <ToastContainer
@@ -88,6 +114,7 @@ export default function Home() {
           {Players.length > 0 ? <h1 className="text-3xl p-5 font-bold">Players:</h1> : <h1 className="text-3xl p-5 font-bold">No Players</h1>}
 
           {
+            // Mapping the Players array to display the names of the players
             Players.map((player, index) => {
               return (
                 <div key={index} className="flex w-full items-center justify-between border-b-2 border-gray-700">
@@ -113,20 +140,30 @@ export default function Home() {
         </div>
 
         <div className="fixed bottom-40 right-0 p-5 flex justify-around items-center bg-[#000] text-white">
-          <button onClick={() => handelStage()} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-4 py-2.5 h-fit text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Next</button>
+          <button onClick={() => handelNext()} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-4 py-2.5 h-fit text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Next</button>
         </div>
       </>
     );
   }
+  // The Second stage is to select the captains
   if (Stage == "SelectCaptain") {
     return (
-    <>
+      <>
 
-    <SelectCaptain Players={Players} />
-    <div className="fixed bottom-40 right-0 p-5 flex justify-around items-center text-white">
-          <button onClick={() => handelStage()} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-4 py-2.5 h-fit text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Next</button>
+        <SelectCaptain Players={Players} setCaptains={setCaptains} />
+        {/* 
+          SelectCaptain component to select the captains 
+          Takes:
+          Players: string[] - The array of players
+          setCaptains: React.Dispatch<React.SetStateAction<string[]>> - The function to set the captains 
+    */}
+        <div className="fixed bottom-40 right-0 p-5 flex justify-around items-center text-white">
+          <button disabled={disabled} onClick={() => handelNext()} className="text-white disabled:bg-blue-300 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-4 py-2.5 h-fit text-center">Next</button>
         </div>
-    </>
+        <div className="fixed bottom-40 left-0 p-5 flex justify-around items-center text-white">
+          <button onClick={() => handelBack()} className="text-white disabled:bg-blue-300 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-4 py-2.5 h-fit text-center">Back</button>
+        </div>
+      </>
 
     )
   }

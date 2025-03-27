@@ -21,7 +21,7 @@ export default function RootLayout({
         className={` ${poppins.className} poppins-regular dark antialiased`}
       >
         <Navbar />
-        <div className="min-h-[calc(100vh-64px)]">
+        <div className="">
         {children}
         </div>
       </body>
