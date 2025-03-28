@@ -3,7 +3,7 @@ import React from 'react'
 import RotatingText from './RotatingText';
 
 const SelectCaptain = ({Players, setCaptains}: {Players:string[]; setCaptains: React.Dispatch<React.SetStateAction<string[]>>}) => {
-    console.log(Players);
+  
   return (<>
   <div className=' bg-black p-5'>
     <div className='text-3xl text-center mt-10 font-bold'>The Match is</div>

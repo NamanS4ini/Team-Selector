@@ -17,6 +17,10 @@ export default function Home() {
   const [captains, setCaptains] = useState(["", ""])
   // disabled is used to disable the next button for 5 seconds after it is clicked to avoid spamming
   const [disabled, setDisabled] = useState(false)
+  // edit is used to check if the user is editing a player or not
+  // If the user is editing a player then the edit button will be shown instead of the delete button
+  const [edit, setEdit] = useState(false)
+  
   // handelNext is used to change the stage to the next stage
   const handelNext = () => {
     if (Players.length < 2) {
@@ -44,6 +48,7 @@ export default function Home() {
   // handelBack is used to change the stage to the previous stage
   const handelBack = () => {
     if (Stage == "SelectCaptain") {
+      setCaptains(["", ""])
       setStage("NameAdd")
     }
   }
@@ -53,14 +58,34 @@ export default function Home() {
       return i !== index
     })
     setPlayers(newPlayers)
+    // Set the Players array to the local storage this is needed because thew useEffect [Players] will not run if the Players array is empty and there always will be 1 player in local array.
+    localStorage.setItem("Players", JSON.stringify(newPlayers));
+
   }
   // handelEdit is used to edit a player from the Players array
   const handelEdit = (index: number) => {
+    if (edit) {
+      toast.warning('Finishing current edit first', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      return
+    }
+    setEdit(true)
+    // Set the current input to the player name that is being edited
     setCurrent(Players[index])
     handelDelete(index)
   }
   // addPlayers is used to add the players to the Players array
   const addPlayers = () => {
+    setEdit(false)
     // If the current input is empty then return
     if (Current.trim() === "") {
       return
@@ -88,7 +113,8 @@ export default function Home() {
   }, [])
   // Saves the Players array to the local storage
   useEffect(() => {
-    if (Players.length > 0) {
+    // If the Players array is not empty and the user is not editing a player then save it to local storage
+    if (Players.length > 0 && !edit) {
       localStorage.setItem("Players", JSON.stringify(Players));
     }
   }, [Players])
@@ -135,7 +161,7 @@ export default function Home() {
               <label htmlFor="floating_name" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Enter Name</label>
 
             </div>
-            <button onClick={addPlayers} type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-4 py-2.5 h-fit text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
+            <button onClick={addPlayers} type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-4 py-2.5 h-fit text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{edit ? "Edit" : "Add"}</button>
           </div>
         </div>
 
@@ -158,7 +184,8 @@ export default function Home() {
           setCaptains: React.Dispatch<React.SetStateAction<string[]>> - The function to set the captains 
     */}
         <div className="fixed bottom-40 right-0 p-5 flex justify-around items-center text-white">
-          <button disabled={disabled} onClick={() => handelNext()} className="text-white disabled:bg-blue-300 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-4 py-2.5 h-fit text-center">Next</button>
+          {/* Does not let the user continue until captains are selected and 5 sec has passed to avoid error on next stage if captains are not selected for some reason */}
+          <button disabled={!(captains[0]) || disabled} onClick={() => handelNext()} className="text-white disabled:bg-blue-300 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-4 py-2.5 h-fit text-center">Next</button>
         </div>
         <div className="fixed bottom-40 left-0 p-5 flex justify-around items-center text-white">
           <button onClick={() => handelBack()} className="text-white disabled:bg-blue-300 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-4 py-2.5 h-fit text-center">Back</button>
