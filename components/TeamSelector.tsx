@@ -1,4 +1,3 @@
-import { div } from 'motion/react-client';
 import React from 'react'
 import DelayedMapping from './Mapping';
 
@@ -13,9 +12,9 @@ const TeamSelector = ({ captains, Players }: { captains: string[]; Players: stri
         // Filter out the captains from the players array
         const playersWOcap = Players.filter((player) => player !== captains[0] && player !== captains[1]);
         // Initialize team1 with captain 1
-        let team1 = [captains[0]];
+        const team1 = [captains[0]];
         // Initialize team2 with captain 2
-        let team2 = [captains[1]];
+        const team2 = [captains[1]];
         // Initialize bichi (The person who will play for both team) as undefined
         let bichi =  undefined;
         // If the number of players without captains is odd, select a random player to be the bichi
@@ -45,7 +44,7 @@ const TeamSelector = ({ captains, Players }: { captains: string[]; Players: stri
             <h1 className='font-bold text-2xl text-center'>Teams are</h1>
             <div className='flex w-full h-[calc(100vh-400px)] justify-center mt-10'>
                 <div className='w-1/2 flex flex-col items-center'>
-                    <h2 className='font-bold text-xl border-b-2 border-gray-500 w-full text-center'>{captains[0]}'s team</h2>
+                    <h2 className='font-bold text-xl border-b-2 border-gray-500 w-full text-center'>{captains[0]}&apos;s team</h2>
                     <div className='w-full p-5'>
                         <ul className='flex flex-col gap-3'>
                             <DelayedMapping names={team1} />
@@ -55,7 +54,7 @@ const TeamSelector = ({ captains, Players }: { captains: string[]; Players: stri
                 </div>
                 <div className='h-full min-h-96 w-px bg-gray-500'></div>
                 <div className='w-1/2 flex flex-col items-center'>
-                    <h2 className='font-bold text-xl border-b-2 border-gray-500 w-full text-center'>{captains[1]}'s team</h2>
+                    <h2 className='font-bold text-xl border-b-2 border-gray-500 w-full text-center'>{captains[1]}&apos;s team</h2>
                     <div className='w-full p-5'>
                         <ul className='flex flex-col gap-3'>
                             <DelayedMapping names={team2} />

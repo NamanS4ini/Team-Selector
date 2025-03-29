@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { s } from "motion/react-client";
 
 interface TossProps {
   name1: string;
