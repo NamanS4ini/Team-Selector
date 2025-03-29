@@ -31,7 +31,7 @@ const Navbar = () => {
       >
         <div>
           <h1 className="pl-8">
-            <Link className="text-2xl font-bold" href="/home">
+            <Link className="text-2xl font-bold" href="/">
               Team Selector
             </Link>
           </h1>
@@ -39,7 +39,7 @@ const Navbar = () => {
         <div className="pr-8">
           <ul className="flex justify-between items-center">
             <li className="  p-4 w-24 flex justify-center items-center">
-              <Link className={pathname === "/home" ? "font-semibold underline underline-offset-8 decoration-blue-500 decoration-2 text-base" : "hover:font-semibold text-base"} href="/home">
+              <Link className={pathname === "/" ? "font-semibold underline underline-offset-8 decoration-blue-500 decoration-2 text-base" : "hover:font-semibold text-base"} href="/">
                 Home
               </Link>
             </li>
@@ -49,8 +49,8 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="  p-4 w-24 flex justify-center items-center">
-              <Link className={pathname === "/" ? "font-semibold underline underline-offset-8 decoration-blue-500 decoration-2 text-base" : "hover:font-semibold text-base"} href="/">
-                Services
+              <Link className={pathname === "/selector" ? "font-semibold underline underline-offset-8 decoration-blue-500 decoration-2 text-base" : "hover:font-semibold text-base"} href="/selector">
+                Selector
               </Link>
             </li>
             <li className=" p-4 w-24 flex justify-center items-center">
@@ -70,7 +70,7 @@ const Navbar = () => {
     >
       <div>
         <h1 className="pl-4">
-          <Link className="text-base font-bold" href="/home">
+          <Link className="text-base font-bold" href="/">
             Team Selector
           </Link>
         </h1>
@@ -81,9 +81,9 @@ const Navbar = () => {
             <NavigationMenuItem>
               <NavigationMenuTrigger>Menu</NavigationMenuTrigger>
               <NavigationMenuContent>
-                <NavigationMenuLink asChild><Link href="/home">Home</Link></NavigationMenuLink>
+                <NavigationMenuLink asChild><Link href="/">Home</Link></NavigationMenuLink>
                 <NavigationMenuLink asChild><Link href="/">About</Link></NavigationMenuLink>
-                <NavigationMenuLink asChild><Link href="/">Selector</Link></NavigationMenuLink>
+                <NavigationMenuLink asChild><Link href="/selector">Selector</Link></NavigationMenuLink>
               </NavigationMenuContent>
             </NavigationMenuItem>
           </NavigationMenuList>
