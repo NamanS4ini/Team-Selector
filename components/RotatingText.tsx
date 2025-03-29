@@ -16,7 +16,7 @@ export default function RotatingText({Players, setCaptains}: {Players:string[]; 
     const interval = setInterval(() => {
       setIndex1((prev) => (prev + 1) % Players.length);
       setIndex2((prev) => {
-        let next = (prev + 1) % Players.length;
+        const next = (prev + 1) % Players.length;
         return next === index1 ? (next + 1) % Players.length : next; // Ensure no duplicates
       });
     }, 150); // Rotate every 150ms
@@ -33,7 +33,7 @@ export default function RotatingText({Players, setCaptains}: {Players:string[]; 
 
   // Function to pick two unique random indices
   function generateTwoUniqueIndices(length: number): [number, number] {
-    let first = Math.floor(Math.random() * length);
+    const first = Math.floor(Math.random() * length);
     let second;
     do {
       second = Math.floor(Math.random() * length);

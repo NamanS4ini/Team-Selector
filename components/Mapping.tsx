@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 export default function DelayedMapping({names, timeInterval} : { names: string[]; timeInterval?: number }) {
   // State to keep track of which names are visible
   const [visibleNames, setVisibleNames] = useState<string[]>([]);
-  console.log("names",names);
 
   const [index, setIndex] = useState(0);
 
@@ -19,9 +18,6 @@ export default function DelayedMapping({names, timeInterval} : { names: string[]
   
     return () => clearInterval(interval);
   }, [index, timeInterval]); // Depend on `index`
-  
-
-  console.log(visibleNames);
 
   return (
     <div>

@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import React from 'react'
-
 const page = () => {
   return (
     <div className='flex flex-col items-center justify-center h-full bg-black text-white'>
