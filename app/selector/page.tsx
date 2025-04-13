@@ -166,7 +166,7 @@ export default function Home() {
           transition={Bounce}
         />
         <div className="md:h-[calc(100vh-64px)] overflow-scroll flex w-full flex-col h-[calc(100vh-200px)] poppins-regular bg-[#000] text-white">
-          {Players.length > 0 ? <h1 className="text-3xl p-5 font-bold">Players:</h1> : <h1 className="text-3xl p-5 font-bold">No Players</h1>}
+          {Players.length > 0 ? <h1 className="text-3xl p-5 font-bold">Players:</h1> : <h1 className="text-3xl w-full h-full flex justify-center items-center p-5 font-bold">No Players...</h1>}
           <ScrollArea className="flex flex-col gap-2 w-full h-[calc(100vh-350px)] p-5">
           {
             // Mapping the Players array to display the names of the players
