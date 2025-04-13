@@ -80,7 +80,7 @@ const Navbar = () => {
               <NavigationMenuTrigger>Menu</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <NavigationMenuLink asChild><Link href="/">Home</Link></NavigationMenuLink>
-                <NavigationMenuLink asChild><Link href="/">About</Link></NavigationMenuLink>
+                <NavigationMenuLink asChild><Link href="/about">About</Link></NavigationMenuLink>
                 <NavigationMenuLink asChild><Link href="/selector">Selector</Link></NavigationMenuLink>
               </NavigationMenuContent>
             </NavigationMenuItem>
