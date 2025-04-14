@@ -51,11 +51,6 @@ const Navbar = () => {
                 Selector
               </Link>
             </li>
-            <li className=" p-4 w-24 flex justify-center items-center">
-              <Link className={pathname === "/contact" ? "font-semibold underline underline-offset-8 decoration-blue-500 decoration-2 text-base" : "hover:font-semibold text-base"} href="/contact">
-                Contact
-              </Link>
-            </li>
           </ul>
         </div>
       </nav>

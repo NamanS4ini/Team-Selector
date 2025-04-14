@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { Inter } from 'next/font/google';
+import ProgressBar from '@/components/ProgressBar'
 
 const poppins = Inter({ subsets: ['latin'] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
       >
         <Navbar />
         <div className="">
+        <ProgressBar />
         {children}
         </div>
       </body>
