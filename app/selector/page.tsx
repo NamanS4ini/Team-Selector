@@ -56,11 +56,7 @@ export default function Home() {
     }
     if (Stage == "SelectTeam") {
       setStage("Toss")
-      setDisabled(true)
-      setTimeout(() => {
-        setDisabled(false)
-      }, 5000);
-      
+      setDisabled(true)      
     }
   }
   // handelBack is used to change the stage to the previous stage
@@ -165,7 +161,7 @@ export default function Home() {
           theme="dark"
           transition={Bounce}
         />
-        <div className="md:h-[calc(100vh-64px)] overflow-scroll flex w-full flex-col h-[calc(100vh-200px)] poppins-regular bg-[#000] text-white">
+        <div className="md:h-[calc(100vh-64px)] overflow-scroll flex w-full flex-col h-[calc(100vh-190px)] poppins-regular bg-zinc-900 text-white">
           {Players.length > 0 ? <h1 className="text-3xl p-5 font-bold">Players:</h1> : <h1 className="text-3xl w-full h-full flex justify-center items-center p-5 font-bold">No Players...</h1>}
           <ScrollArea className="flex flex-col gap-2 w-full h-[calc(100vh-350px)] p-5">
           {
@@ -184,7 +180,7 @@ export default function Home() {
           }
           </ScrollArea>
 
-          <div className="fixed bottom-10 w-full gap-2 justify-around border border-t-gray-500 items-center flex p-3 bg-[#000] text-white">
+          <div className="fixed bottom-0 w-full gap-2 justify-around border border-t-gray-500 items-center flex p-3 bg-zinc-900 text-white">
 
             <div className="relative z-0 mb-5 group">
               <input value={Current} onChange={e => { setCurrent(e.target.value) }} type="text" name="floating_name" id="floating_name" className="block md:w-60 py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />

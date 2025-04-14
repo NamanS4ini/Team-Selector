@@ -40,7 +40,7 @@ const TeamSelector = ({ captains, Players }: { captains: string[]; Players: stri
         }
         const { team1, team2, bichi } = selectTeam();
     return (
-        <div className='flex flex-col items-center justify-center h-full bg-black text-white'>
+        <div className='flex flex-col items-center pt-10 md:min-h-[calc(100vh-65px)] min-h-[calc(100vh-49px)] bg-zinc-900 text-white'>
             <h1 className='font-bold text-2xl text-center'>Teams are</h1>
             <div className='flex w-full h-[calc(100vh-400px)] justify-center mt-10'>
                 <div className='w-1/2 flex flex-col items-center'>

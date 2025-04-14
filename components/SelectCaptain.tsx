@@ -5,7 +5,7 @@ import RotatingText from './RotatingText';
 const SelectCaptain = ({Players, setCaptains}: {Players:string[]; setCaptains: React.Dispatch<React.SetStateAction<string[]>>}) => {
   
   return (<>
-  <div className=' bg-black p-5'>
+  <div className=' bg-zinc-900 md:min-h-[calc(100vh-65px)] min-h-[calc(100vh-49px)] p-5'>
     <div className='text-3xl text-center mt-10 font-bold'>The Match is</div>
     <div className='flex mt-20 flex-col items-center justify-center h-full'>
       {/* Gives the Players array and seCaptains fxn to RotatingText */}
