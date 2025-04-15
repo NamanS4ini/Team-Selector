@@ -13,11 +13,6 @@ export default function ProgressBar() {
 
   useEffect(() => {
     NProgress.start()
-    const timeout = setTimeout(() => {
-      NProgress.done()
-    }, 300) // Adjust this based on how fast your pages load
-
-    return () => clearTimeout(timeout)
   }, [pathname])
 
   return null

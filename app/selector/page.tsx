@@ -4,6 +4,9 @@ import TeamSelector from "@/components/TeamSelector";
 import TossAnimation from "@/components/Toss";
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useEffect, useState } from "react";
+
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 
 type Stage = "NameAdd" | "SelectCaptain" | "SelectTeam" | "Toss";
@@ -132,6 +135,7 @@ export default function Home() {
   // Checks if there is Players array in the local storage and sets it to the Players array
   useEffect(() => {
     const data = localStorage.getItem("Players")
+    NProgress.done()
     if (data) {
       setPlayers(JSON.parse(data))
     }

@@ -2,8 +2,17 @@
 
 import Link from "next/link";
 import { Users, Info } from "lucide-react";
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+import { useEffect } from "react";
+
+
 
 export default function HomePage() {
+  useEffect(() => {
+    NProgress.done()
+  }, [])
+
   return (
     <main className="md:min-h-[calc(100vh-65px)] min-h-[calc(100vh-49px)] bg-zinc-900 text-zinc-100 flex items-center justify-center px-6 py-12">
       <div className="text-center space-y-6 max-w-2xl">

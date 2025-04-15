@@ -2,8 +2,13 @@
 
 import Link from "next/link";
 import { Github, Globe } from "lucide-react";
+import { useEffect } from "react";
+import nProgress from "nprogress";
 
 export default function AboutPage() {
+  useEffect(() => {
+      nProgress.done()
+    }, [])
   return (
     <main className="md:min-h-[calc(100vh-65px)] min-h-[calc(100vh-49px)] flex items-center justify-center bg-zinc-900 text-zinc-100 px-6 py-12">
       <div className="max-w-2xl w-full bg-zinc-800 rounded-2xl shadow-2xl p-8 space-y-6">
