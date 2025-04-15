@@ -2,14 +2,19 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { Inter } from 'next/font/google';
-import ProgressBar from '@/components/ProgressBar'
-import Head from "next/head";
+import ProgressBar from '@/components/ProgressBar';
 
 const poppins = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: "Team Selector",
   description: "Randomly select players, captains, and toss results for cricket matches.",
+  themeColor: "#0d47a1",
+  manifest: "/manifest.json",
+  icons: {
+    icon: "/icons/icon-192x192.png",
+    apple: "/icons/icon-192x192.png",
+  },
 };
 
 export default function RootLayout({
@@ -19,18 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#0d47a1" />
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-      </Head>
-      <body
-        className={` ${poppins.className} poppins-regular dark antialiased`}
-      >
+      <body className={`${poppins.className} poppins-regular dark antialiased`}>
         <Navbar />
-        <div className="">
-        <ProgressBar />
-        {children}
+        <div>
+          <ProgressBar />
+          {children}
         </div>
       </body>
     </html>
